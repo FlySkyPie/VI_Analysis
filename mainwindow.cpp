@@ -102,12 +102,15 @@ void MainWindow::redrawSlice(uint index)
     vector <double>P = Data.getPowers();
     vector <double>DI = Data.getDeltaCurrents( index );
 
+    cout << "new data\n";
+
     for(uint i=0; i< P.size();i++)
     {
         Chart.addData( P[i], DI[i] );
+        cout << i << ":" << P[i] << "," << DI[i] << endl;
     }
 
-    cout << Chart.getMinOfX() <<  "~" << Chart.getMaxOfX() << "," << Chart.getMinOfY() << "~" << Chart.getMaxOfY() << endl;
+    //cout << Chart.getMinOfX() <<  "~" << Chart.getMaxOfX() << "," << Chart.getMinOfY() << "~" << Chart.getMaxOfY() << endl;
 
     //redraw chart
     Chart.reDraw();

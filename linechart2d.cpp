@@ -94,15 +94,37 @@ void  LineChart2D::reDraw()
 
     QPainter painter(&pic);
     painter.setPen(Qt::black);
+    QBrush currentBrush = painter.brush();
 
-    uint FrameWidth,FrameHeight,MaxElement,MaxTemperature;
-    float StepWidth,StepHeight;
-    FrameWidth = Width - 20;        //frame's width
-    FrameHeight = Height - 20;      //frame's height
-    MaxElement = Width;               //how many element(data) that want show
-    MaxTemperature = 800;           //maximum value of y axis
-    StepWidth = 1.0 * FrameWidth / MaxElement;          // (x/element) ratio
-    StepHeight = 1.0 * FrameHeight / MaxTemperature;    // (y/temerature) ratio
+    uint FrameWidth,FrameHeight, Boundary;
+    Boundary = 10;
+    double StepWidth,StepHeight;
+    FrameWidth = Width - Boundary*2;        //frame's width
+    FrameHeight = Height - Boundary*2;      //frame's height
+
+    StepWidth = 1.0 * FrameWidth / (MaxOfX - MinOfX);          // (px/data unit) ratio
+    StepHeight = 1.0 * FrameHeight / (MaxOfY - MinOfY);    // (px/data unit) ratio
+
+
+    //draw vertical and horizontal
+    painter.setPen(Qt::gray);
+    painter.drawLine(Boundary, (Height - Boundary)/2 , Width - Boundary, (Height - Boundary)/2);
+    painter.drawLine((Width - Boundary)/2, Boundary, (Width - Boundary)/2, Height - Boundary);
+
+    //draw data
+    QBrush brush(Qt::blue);
+    painter.setBrush(brush);
+    for(uint i =0; i<DataOfXAxis.size(); i++ )
+    {
+        uint x,y;
+        x = Boundary + (DataOfXAxis.at(i) - MinOfX) * StepWidth;
+        y = Boundary + FrameHeight - (DataOfYAxis.at(i) - MinOfY) * StepHeight;
+        painter.drawEllipse(QPointF(x,y), 3, 3);
+        QString str = "(" + QString::number(DataOfXAxis.at(i)) + "," + QString::number(DataOfYAxis.at(i)) + ")";
+        painter.drawText( QPoint(x,y), str );
+
+    }
+
 
     //prepare draw axis line
     /*
@@ -134,6 +156,7 @@ void  LineChart2D::reDraw()
     }
 */
     //draw frame
+    painter.setBrush(currentBrush);
     painter.setPen(Qt::black);
     painter.drawRect(10,10, FrameWidth, FrameHeight);
 
