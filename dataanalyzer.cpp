@@ -1,18 +1,34 @@
 #include "dataanalyzer.h"
 
-#include <QFile>
-#include <QString>
-#include <QMessageBox>
-#include <QTextStream>
 
-#include <sstream>
-#include <iostream>
-
-using namespace std;
 
 DataAnalyzer::DataAnalyzer()
 {
 
+}
+
+vector <double>DataAnalyzer::getDeltaCurrents( uint index)
+{
+    uint amount = PowerDatas.size();
+    vector <double> datas;
+
+    for(uint i =0;i<amount;i++)
+    {
+        datas.push_back( CurrentDatas.at(i).at(index) );
+    }
+    return datas;
+}
+
+vector <double>DataAnalyzer::getPowers()
+{
+    uint amount = PowerDatas.size();
+    vector <double> datas;
+
+    for(uint i =0;i<amount;i++)
+    {
+        datas.push_back( PowerDatas.at(i) );
+    }
+    return datas;
 }
 
 /* @todo initialize Data Anolyzer by string of data path
@@ -64,7 +80,7 @@ void DataAnalyzer::addFirstCurrentData( double current )
 /*
  * @
  */
-void DataAnalyzer::addCurrentData( QString FilePath )
+void DataAnalyzer::addCurrentData( double _Power ,QString FilePath )
 {
     QFile file( FilePath );
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -92,6 +108,7 @@ void DataAnalyzer::addCurrentData( QString FilePath )
     }
 
     CurrentDatas.push_back( Current );
+    PowerDatas.push_back(_Power);
 
 }
 
@@ -103,13 +120,18 @@ void DataAnalyzer::ckeckDataLength()
     //check first data
      cout << "No.0"  << " " << FirstVoltage.size() << endl;
 
-    for (int i=0; i<CurrentDatas.size();i++ )
+    for (uint i=0; i<CurrentDatas.size();i++ )
     {
         int size = CurrentDatas.at(i).size();
         cout << "No." << i+1 << " " << size << endl;
     }
 
 
+}
+
+uint DataAnalyzer::getLength()
+{
+    return FirstVoltage.size();
 }
 
 DataAnalyzer::~DataAnalyzer()

@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -15,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     this->setFixedSize(1187,755);        //set windows size
     AppPath = QDir::currentPath();
+
+    Chart.injectView( ui->graphicsView );
 }
 
 MainWindow::~MainWindow()
@@ -61,6 +64,7 @@ void MainWindow::on_pushButton_4_clicked()
 //start analysis
 void MainWindow::on_pushButton_6_clicked()
 {
+    double power = 0;
     //load data of dark
     QString path = ui->lineEdit_9->text();
     Data.initialize( path );
@@ -68,20 +72,54 @@ void MainWindow::on_pushButton_6_clicked()
 
     //load 1st data
     path = ui->lineEdit_5->text();
-    Data.addCurrentData( path );
+    power = ui->lineEdit->text().toDouble();
+    Data.addCurrentData( power, path );
     //load 2nd data
     path = ui->lineEdit_6->text();
-    Data.addCurrentData( path );
+    power = ui->lineEdit_2->text().toDouble();
+    Data.addCurrentData( power, path );
 
     //load 3rd data
     path = ui->lineEdit_7->text();
-    Data.addCurrentData( path );
+    power = ui->lineEdit_3->text().toDouble();
+    Data.addCurrentData( power, path );
 
     //load 4th data
     path = ui->lineEdit_8->text();
-    Data.addCurrentData( path );
+    power = ui->lineEdit_4->text().toDouble();
+    Data.addCurrentData( power, path );
 
     //Data.ckeckDataLength();       //DEBUG
+    //set maxium of scroll bar
+    ui->horizontalSlider->setMaximum( Data.getLength() - 1 );
+
+}
+
+void MainWindow::redrawSlice(uint index)
+{
+    //load new data
+    Chart.clearData();
+    vector <double>P = Data.getPowers();
+    vector <double>DI = Data.getDeltaCurrents( index );
+
+    for(uint i=0; i< P.size();i++)
+    {
+        Chart.addData( P[i], DI[i] );
+    }
+
+    cout << Chart.getMinOfX() <<  "~" << Chart.getMaxOfX() << "," << Chart.getMinOfY() << "~" << Chart.getMaxOfY() << endl;
+
+    //redraw chart
+    Chart.reDraw();
 
 
+}
+
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    QString str = "Voltage = "  + QString::number( value )  +" Volt";
+    ui->label_11->setText( str );
+
+    redrawSlice( abs(value) );
 }

@@ -5,6 +5,8 @@
 
 #include "dataanalyzer.h"
 
+#include "linechart2d.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -20,6 +22,8 @@ public:
     DataAnalyzer Data;
     QString AppPath;
 
+    LineChart2D Chart;
+
 private slots:
     void on_pushButton_5_clicked();
 
@@ -32,6 +36,10 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_6_clicked();
+
+    void redrawSlice(uint index);
+
+    void on_horizontalSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

@@ -50,6 +50,42 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;注意：&lt;br/&gt;1. 五筆數組的first column（電壓資料）必須相同或接近&lt;br/&gt;2. 五筆數組的蕭基障壁方向需相同&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QSlider" name="horizontalSlider">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>690</y>
+      <width>451</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>350</y>
+      <width>451</width>
+      <height>321</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>710</y>
+      <width>181</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Voltage = -- Volt</string>
+    </property>
+   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
@@ -78,6 +114,9 @@
         <widget class="QLineEdit" name="lineEdit_9">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05.txt</string>
          </property>
         </widget>
        </item>
@@ -131,6 +170,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="text">
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.07A.txt</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -182,6 +224,9 @@
         <widget class="QLineEdit" name="lineEdit_6">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.14A.txt</string>
          </property>
         </widget>
        </item>
@@ -235,6 +280,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="text">
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.35A.txt</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -286,6 +334,9 @@
         <widget class="QLineEdit" name="lineEdit_8">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.7A.txt</string>
          </property>
         </widget>
        </item>

@@ -1,12 +1,20 @@
 #ifndef DATAANALYZER_H
 #define DATAANALYZER_H
 
+#include <QFile>
+#include <QString>
+#include <QMessageBox>
+#include <QTextStream>
+
 #include <vector>
 #include <cstring>
-
-#include <QString>
+#include <array>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
+
+
 
 class DataAnalyzer
 {
@@ -17,14 +25,19 @@ public:
     void initialize( QString );
     void addFirstVoltageData( double );
     void addFirstCurrentData( double );
-    void addCurrentData( QString str );
+    void addCurrentData( double, QString str );
     void ckeckDataLength();
+    uint getLength();
+
+    vector <double> getDeltaCurrents( uint index);
+    vector <double> getPowers();
 
 
 private:
     vector <double> FirstVoltage;
     vector <double> FirstCurrent;
     vector <vector <double> > CurrentDatas;
+    vector <double> PowerDatas;
 
 };
 

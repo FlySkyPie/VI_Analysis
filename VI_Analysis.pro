@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    dataanalyzer.cpp
+    dataanalyzer.cpp \
+    linechart2d.cpp
 
 HEADERS  += mainwindow.h \
-    dataanalyzer.h
+    dataanalyzer.h \
+    linechart2d.h
 
 FORMS    += mainwindow.ui
