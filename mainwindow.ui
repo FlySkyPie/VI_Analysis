@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>I-V曲線分析</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton_6">
@@ -51,6 +51,9 @@
     </property>
    </widget>
    <widget class="QSlider" name="horizontalSlider">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -86,6 +89,19 @@
      <string>Voltage = -- Volt</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>710</y>
+      <width>201</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>m = --</string>
+    </property>
+   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
@@ -116,7 +132,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05.txt</string>
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-07/20180501-IC-07.txt</string>
          </property>
         </widget>
        </item>
@@ -171,7 +187,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.07A.txt</string>
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-07/20180501-IC-07-0.07A.txt</string>
          </property>
         </widget>
        </item>
@@ -226,7 +242,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.14A.txt</string>
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-07/20180501-IC-07-0.14A.txt</string>
          </property>
         </widget>
        </item>
@@ -281,7 +297,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.35A.txt</string>
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-07/20180501-IC-07-0.35A.txt</string>
          </property>
         </widget>
        </item>
@@ -336,7 +352,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-05/20180501-IC-05-0.7A.txt</string>
+          <string>/home/flypie/Documents/虎尾/課程_材料製程實驗（一）/實驗報告/7 I-V曲線/program/Error in &quot; Util.asciify(&quot;build-VI_Analysis-Desktop_Qt_5_7_0_GCC_64bit-Debug&quot;)&quot;: TypeError: Property 'asciify' of object Core::Internal::UtilsJsExtension(0x2572400) is not a function/data/IC-07/20180501-IC-07-0.7A.txt</string>
          </property>
         </widget>
        </item>

@@ -32,6 +32,8 @@ public:
     vector <double> getDeltaCurrents( uint index);
     vector <double> getPowers();
 
+    double getVoltage(uint index);
+
 
 private:
     vector <double> FirstVoltage;

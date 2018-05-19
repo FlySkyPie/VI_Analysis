@@ -28,6 +28,9 @@ public:
 
     void clearData();
 
+    void LinearRegression();
+
+    double getSlope();
 
 private:
     uint Width;
@@ -45,6 +48,9 @@ private:
 
     vector<double> DataOfXAxis;
     vector<double> DataOfYAxis;
+
+    double a;
+    double b;
 
 };
 

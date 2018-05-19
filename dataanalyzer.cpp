@@ -104,7 +104,8 @@ void DataAnalyzer::addCurrentData( double _Power ,QString FilePath )
         double current;
         si >> current;
 
-        Current.push_back( current );
+        double DeltaOfCurrent = current - FirstCurrent.at( Current.size() );
+        Current.push_back( DeltaOfCurrent );
     }
 
     CurrentDatas.push_back( Current );
@@ -136,5 +137,11 @@ uint DataAnalyzer::getLength()
 
 DataAnalyzer::~DataAnalyzer()
 {
+
+}
+
+double DataAnalyzer::getVoltage(uint index)
+{
+    return FirstVoltage.at(index);
 
 }

@@ -93,6 +93,8 @@ void MainWindow::on_pushButton_6_clicked()
     //set maxium of scroll bar
     ui->horizontalSlider->setMaximum( Data.getLength() - 1 );
 
+    ui->horizontalSlider->setEnabled(true);
+
 }
 
 void MainWindow::redrawSlice(uint index)
@@ -110,19 +112,20 @@ void MainWindow::redrawSlice(uint index)
         cout << i << ":" << P[i] << "," << DI[i] << endl;
     }
 
-    //cout << Chart.getMinOfX() <<  "~" << Chart.getMaxOfX() << "," << Chart.getMinOfY() << "~" << Chart.getMaxOfY() << endl;
+    Chart.LinearRegression();
 
     //redraw chart
     Chart.reDraw();
-
-
 }
 
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
-    QString str = "Voltage = "  + QString::number( value )  +" Volt";
+    QString str = "Voltage = "  + QString::number( Data.getVoltage(value) )  +" Volt";
     ui->label_11->setText( str );
 
     redrawSlice( abs(value) );
+
+    str = "斜率 = "  + QString::number( Chart.getSlope() ) ;
+    ui->label_12->setText( str );
 }

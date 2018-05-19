@@ -111,6 +111,25 @@ void  LineChart2D::reDraw()
     painter.drawLine(Boundary, (Height - Boundary)/2 , Width - Boundary, (Height - Boundary)/2);
     painter.drawLine((Width - Boundary)/2, Boundary, (Width - Boundary)/2, Height - Boundary);
 
+    /*
+     * @todo Linear regression線性回歸
+     * @link https://blog.csdn.net/qll125596718/article/details/8248249
+     */
+    double t1=0, t2=0, t3=0, t4=0,a,b;
+    for(uint i=0; i<DataOfXAxis.size(); ++i)
+    {
+        double x,y;
+        x = DataOfXAxis.at(i);
+        y = DataOfYAxis.at(i);
+        t1 += x*x;
+        t2 += x;
+        t3 += x*y;
+        t4 += y;
+    }
+    a = (t3*DataOfXAxis.size() - t2*t4) / (t1*DataOfXAxis.size() - t2*t2);
+    b = (t1*t4 - t2*t3) / (t1 * DataOfXAxis.size() - t2*t2);
+
+
     //draw data
     QBrush brush(Qt::blue);
     painter.setBrush(brush);
@@ -122,43 +141,59 @@ void  LineChart2D::reDraw()
         painter.drawEllipse(QPointF(x,y), 3, 3);
         QString str = "(" + QString::number(DataOfXAxis.at(i)) + "," + QString::number(DataOfYAxis.at(i)) + ")";
         painter.drawText( QPoint(x,y), str );
-
     }
 
+    //draw line
+    painter.setPen(Qt::black);
 
-    //prepare draw axis line
-    /*
-    painter.setPen(Qt::gray);
-    uint DistantX,DistantY;
-    DistantX = 60;//FrameWidth / 10;
-    DistantY = 100;
+    double Lx1,Ly1,Lx2,Ly2;
 
-    //draw vertical line
-    uint v_lines = MaxElement / DistantX;
-    for(uint i=1;i<v_lines;i++)
-    {
-        uint x,y1,y2;
-        x = 10 + DistantX * i;
-        y1 = Height - 10;
-        y2 = Height - 10 - FrameHeight;
-        painter.drawLine(x,y1,x,y2);
-    }
+    Lx1 = MinOfX;
+    Ly1 = a * MinOfX +b;
 
-    //draw horizontal line
-    uint lines = MaxTemperature / DistantY;
-    for(uint i=1; i<=lines ;i++)
-    {
-        uint x1,x2,y;
-        x1 = 10 ;
-        x2 = 10 + FrameWidth;
-        y = Height - 10 -  DistantY * i * StepHeight;
-        painter.drawLine(x1,y,x2,y);
-    }
-*/
+    Lx2 = MaxOfX;
+    Ly2 = a * MaxOfX +b;
+
+    uint Px1,Py1,Px2,Py2;
+
+    Px1 = Boundary + (Lx1 - MinOfX) * StepWidth;
+    Py1 = Boundary + FrameHeight - (Ly1 - MinOfY) * StepHeight;
+    Px2 = Boundary + (Lx2 - MinOfX) * StepWidth;
+    Py2 = Boundary + FrameHeight - (Ly2 - MinOfY) * StepHeight;
+
+    painter.drawLine( Px1, Py1, Px2, Py2);
+
     //draw frame
     painter.setBrush(currentBrush);
     painter.setPen(Qt::black);
     painter.drawRect(10,10, FrameWidth, FrameHeight);
 
     Scene->addPixmap( pic );
+}
+
+/*
+ * @todo Linear regression線性回歸
+ * @link https://blog.csdn.net/qll125596718/article/details/8248249
+ */
+void LineChart2D::LinearRegression()
+{
+    double t1=0, t2=0, t3=0, t4=0;
+    for(uint i=0; i<DataOfXAxis.size(); ++i)
+    {
+        double x,y;
+        x = DataOfXAxis.at(i);
+        y = DataOfYAxis.at(i);
+        t1 += x*x;
+        t2 += x;
+        t3 += x*y;
+        t4 += y;
+    }
+    a = (t3*DataOfXAxis.size() - t2*t4) / (t1*DataOfXAxis.size() - t2*t2);
+    b = (t1*t4 - t2*t3) / (t1 * DataOfXAxis.size() - t2*t2);
+}
+
+
+double LineChart2D::getSlope()
+{
+    return a;
 }
