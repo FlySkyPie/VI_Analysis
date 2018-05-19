@@ -316,8 +316,31 @@ void DataAnalyzer::draw3DChart()
     Scene->addPixmap( pic );
 }
 
-double DataAnalyzer::getMaxSlope()
+double *DataAnalyzer::getMaxSlope()
 {
+    double *max = new double[2];
+    for(uint j=0; j<FirstVoltage.size();j++ )
+    {
+        double t1=0, t2=0, t3=0, t4=0,a,b;
+        for(uint i=0; i<PowerDatas.size(); ++i)
+        {
+            double x,y;
+            x = PowerDatas.at(i);
+            y = CurrentDatas.at(i).at(j);
+            t1 += x*x;
+            t2 += x;
+            t3 += x*y;
+            t4 += y;
+        }
+        a = (t3*PowerDatas.size() - t2*t4) / (t1*PowerDatas.size() - t2*t2);
+        b = (t1*t4 - t2*t3) / (t1 * PowerDatas.size() - t2*t2);
 
+        if( abs(a)> max[1] )
+        {
+            max[0] = FirstVoltage.at(j);
+            max[1] = abs(a);
+        }
 
+    }
+    return max;
 }

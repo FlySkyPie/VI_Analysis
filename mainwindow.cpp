@@ -106,6 +106,11 @@ void MainWindow::on_pushButton_6_clicked()
     //draw 3D
     Data.draw3DChart();
 
+    //update
+    double *max= Data.getMaxSlope();
+    QString str = "最大斜率= " + QString::number( max[1] )  + " A/w, 發生在V= " + QString::number( max[0] ) +" V";
+    ui->label_13->setText(str);
+
 }
 
 void MainWindow::redrawSlice(uint index)
@@ -127,6 +132,8 @@ void MainWindow::redrawSlice(uint index)
 
     //redraw chart
     Chart.reDraw();
+
+
 }
 
 

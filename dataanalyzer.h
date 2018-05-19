@@ -43,7 +43,7 @@ public:
 
     void draw3DChart();
 
-    double getMaxSlope();
+    double *getMaxSlope();
 
 
 private:
