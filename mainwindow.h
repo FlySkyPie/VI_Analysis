@@ -18,6 +18,7 @@ public:
     ~MainWindow();
 
     DataAnalyzer Data;
+    QString AppPath;
 
 private slots:
     void on_pushButton_5_clicked();
