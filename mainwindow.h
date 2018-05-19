@@ -6,6 +6,7 @@
 #include "dataanalyzer.h"
 
 #include "linechart2d.h"
+#include "linechart3d.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,7 @@ public:
     QString AppPath;
 
     LineChart2D Chart;
+    LineChart3D Chart3D;
 
 private slots:
     void on_pushButton_5_clicked();

@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
     AppPath = QDir::currentPath();
 
     Chart.injectView( ui->graphicsView );
+    Chart3D.injectView( ui->graphicsView_2 );
+
+    Data.Chart3D = &Chart3D;
 }
 
 MainWindow::~MainWindow()
@@ -89,11 +92,19 @@ void MainWindow::on_pushButton_6_clicked()
     power = ui->lineEdit_4->text().toDouble();
     Data.addCurrentData( power, path );
 
-    //Data.ckeckDataLength();       //DEBUG
-    //set maxium of scroll bar
     ui->horizontalSlider->setMaximum( Data.getLength() - 1 );
-
     ui->horizontalSlider->setEnabled(true);
+
+    //disable button of browser
+    ui->pushButton->setEnabled(false);
+    ui->pushButton_2->setEnabled(false);
+    ui->pushButton_3->setEnabled(false);
+    ui->pushButton_4->setEnabled(false);
+    ui->pushButton_5->setEnabled(false);
+    ui->pushButton_6->setEnabled(false);
+
+    //draw 3D
+    Data.draw3DChart();
 
 }
 

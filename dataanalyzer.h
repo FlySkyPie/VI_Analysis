@@ -11,6 +11,11 @@
 #include <array>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+
+#include "linechart3d.h"
 
 using namespace std;
 
@@ -33,6 +38,12 @@ public:
     vector <double> getPowers();
 
     double getVoltage(uint index);
+
+    LineChart3D * Chart3D;
+
+    void draw3DChart();
+
+    double getMaxSlope();
 
 
 private:
