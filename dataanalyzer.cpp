@@ -48,14 +48,14 @@ void DataAnalyzer::initialize( QString FilePath )
         if( line=="" )
             continue;
 
-        //cout << line.toUtf8().constData() <<endl;     //DEBUG
-
         QStringList data = line.split('	');     //this is ascii 0x09
 
+        //trans Qstring to double
         istringstream sv( data.at(0).toUtf8().constData() );
         double voltage;
         sv >> voltage;
 
+        //trans Qstring to double
         istringstream si( data.at(1).toUtf8().constData() );
         double current;
         si >> current;
@@ -77,8 +77,9 @@ void DataAnalyzer::addFirstCurrentData( double current )
     FirstCurrent.push_back( current );
 }
 
-/*
- * @
+/* @todo add current datas by string of data path
+ * @param Double _Power
+ * @param QString FilePath
  */
 void DataAnalyzer::addCurrentData( double _Power ,QString FilePath )
 {
@@ -108,18 +109,16 @@ void DataAnalyzer::addCurrentData( double _Power ,QString FilePath )
         double v = FirstVoltage.at( Current.size() );
         Chart3D->addData( v, _Power, DeltaOfCurrent  );
 
-
         Current.push_back( DeltaOfCurrent );
-
-
     }
 
-    CurrentDatas.push_back( Current );
+    CurrentDatas.push_back( Current );  //add data serial
     PowerDatas.push_back(_Power);
 }
 
 /*
  * @todo ckeck how many data that the object had.
+ * @ignore be used to DEBUG
  */
 void DataAnalyzer::ckeckDataLength()
 {
@@ -131,8 +130,6 @@ void DataAnalyzer::ckeckDataLength()
         int size = CurrentDatas.at(i).size();
         cout << "No." << i+1 << " " << size << endl;
     }
-
-
 }
 
 uint DataAnalyzer::getLength()
@@ -156,7 +153,7 @@ void DataAnalyzer::draw3DChart()
 
     double MaxOfPx,MaxOfPy,MinOfPx, MinOfPy;
 
-    //get maxium and minium
+    //get maxium and minium of 2 deimension double system
     for(int i=0; i< Chart3D->DataOfXAxis.size() ;i++)
     {
         double x = Chart3D->DataOfXAxis.at(i)
@@ -195,9 +192,7 @@ void DataAnalyzer::draw3DChart()
 
 
     for( uint i = 0; i<2; i++ ) //x
-    {
         for( uint j=0; j<2; j++ )   //y
-        {
             for( uint k=0; k<2; k++)    //z
             {
                 double Px,Py;
@@ -212,10 +207,8 @@ void DataAnalyzer::draw3DChart()
                     MinOfPx = Px;
                 if( Py < MinOfPy )
                     MinOfPy = Py;
-
             }
-        }
-    }
+
 
     double Width = Chart3D->Width
            ,Height = Chart3D->Height;
@@ -223,8 +216,6 @@ void DataAnalyzer::draw3DChart()
     //rate of px/floatX in 2 Dimensions system
     double RateOfX = 1.0 * Width / (MaxOfPx - MinOfPx );
     double RateOfY = 1.0 * Height / (MaxOfPy - MinOfPy );
-
-
 
     //fill background to white
     QGraphicsScene *Scene = Chart3D->Scene;
@@ -242,6 +233,7 @@ void DataAnalyzer::draw3DChart()
     C = rand() % 6 + 1;
     for( uint j=0; j<PowerDatas.size();j++ )
     {
+        //generate color
         while(1)
         {
             R = (C%2)?   rand() % 50 : ( 200 + rand()%55 );
@@ -252,7 +244,6 @@ void DataAnalyzer::draw3DChart()
                 break;
         }
         C = (C==6) ? 1 : C+1; //C = (C + (rand() %3) ) %6 +1;
-
 
         painter.setPen(QColor( R, G, B ));
         double power = PowerDatas.at(j);
@@ -321,6 +312,7 @@ double *DataAnalyzer::getMaxSlope()
     double *max = new double[2];
     for(uint j=0; j<FirstVoltage.size();j++ )
     {
+        //Linear regression
         double t1=0, t2=0, t3=0, t4=0,a,b;
         for(uint i=0; i<PowerDatas.size(); ++i)
         {
@@ -340,7 +332,6 @@ double *DataAnalyzer::getMaxSlope()
             max[0] = FirstVoltage.at(j);
             max[1] = abs(a);
         }
-
     }
     return max;
 }

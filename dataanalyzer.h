@@ -19,39 +19,33 @@
 
 using namespace std;
 
-
-
 class DataAnalyzer
 {
 public:
     DataAnalyzer();
     ~DataAnalyzer();
 
+
+    LineChart3D * Chart3D;
+
     void initialize( QString );
     void addFirstVoltageData( double );
     void addFirstCurrentData( double );
     void addCurrentData( double, QString str );
     void ckeckDataLength();
-    uint getLength();
-
-    vector <double> getDeltaCurrents( uint index);
-    vector <double> getPowers();
-
-    double getVoltage(uint index);
-
-    LineChart3D * Chart3D;
-
     void draw3DChart();
 
+    uint getLength();
+    double getVoltage(uint index);
     double *getMaxSlope();
-
+    vector <double> getDeltaCurrents( uint index);
+    vector <double> getPowers();
 
 private:
     vector <double> FirstVoltage;
     vector <double> FirstCurrent;
     vector <vector <double> > CurrentDatas;
     vector <double> PowerDatas;
-
 };
 
 #endif // DATAANALYZER_H

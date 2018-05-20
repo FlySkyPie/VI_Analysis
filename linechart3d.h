@@ -16,10 +16,6 @@ class LineChart3D
 public:
     LineChart3D();
 
-    void injectView( QGraphicsView * OldView);
-
-    void addData(double, double, double);
-
     QGraphicsScene *Scene;
     QGraphicsView *View;
 
@@ -39,11 +35,13 @@ public:
     float RateOfY;
     float RateOfZ;
 
-
-
     vector<double> DataOfXAxis;
     vector<double> DataOfYAxis;
     vector<double> DataOfZAxis;
+
+    void injectView( QGraphicsView * OldView);
+
+    void addData(double, double, double);
 };
 
 #endif // LINECHART3D_H

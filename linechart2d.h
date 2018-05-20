@@ -18,18 +18,14 @@ public:
     void injectView( QGraphicsView * );
 
     void reDraw();
-
+    void clearData();
+    void LinearRegression();
     void addData(double, double);
 
     double getMaxOfX();
     double getMaxOfY();
     double getMinOfX();
     double getMinOfY();
-
-    void clearData();
-
-    void LinearRegression();
-
     double getSlope();
 
 private:

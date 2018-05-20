@@ -1,0 +1,147 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+
+#include <QFileDialog>
+
+#include <cstdlib>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+    this->setFixedSize(1187,755);        //set windows size
+    AppPath = QDir::currentPath();
+
+    Chart.injectView( ui->graphicsView );
+    Chart3D.injectView( ui->graphicsView_2 );
+
+    Data.Chart3D = &Chart3D;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+//
+void MainWindow::on_pushButton_5_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("選擇實驗數據"), AppPath , tr("Experiment Data (*.txt)"));
+    ui->lineEdit_9->setText(fileName);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("選擇實驗數據"), AppPath, tr("Experiment Data (*.txt)"));
+    ui->lineEdit_5->setText(fileName);
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("選擇實驗數據"), AppPath, tr("Experiment Data (*.txt)"));
+    ui->lineEdit_6->setText(fileName);
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("選擇實驗數據"), AppPath, tr("Experiment Data (*.txt)"));
+    ui->lineEdit_7->setText(fileName);
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        tr("選擇實驗數據"), AppPath, tr("Experiment Data (*.txt)"));
+    ui->lineEdit_8->setText(fileName);
+}
+
+//start analysis
+void MainWindow::on_pushButton_6_clicked()
+{
+    double power = 0;
+    //load data of dark
+    QString path = ui->lineEdit_9->text();
+    Data.initialize( path );
+
+
+    //load 1st data
+    path = ui->lineEdit_5->text();
+    power = ui->lineEdit->text().toDouble();
+    Data.addCurrentData( power, path );
+    //load 2nd data
+    path = ui->lineEdit_6->text();
+    power = ui->lineEdit_2->text().toDouble();
+    Data.addCurrentData( power, path );
+
+    //load 3rd data
+    path = ui->lineEdit_7->text();
+    power = ui->lineEdit_3->text().toDouble();
+    Data.addCurrentData( power, path );
+
+    //load 4th data
+    path = ui->lineEdit_8->text();
+    power = ui->lineEdit_4->text().toDouble();
+    Data.addCurrentData( power, path );
+
+    ui->horizontalSlider->setMaximum( Data.getLength() - 1 );
+    ui->horizontalSlider->setEnabled(true);
+
+    //disable button of browser
+    ui->pushButton->setEnabled(false);
+    ui->pushButton_2->setEnabled(false);
+    ui->pushButton_3->setEnabled(false);
+    ui->pushButton_4->setEnabled(false);
+    ui->pushButton_5->setEnabled(false);
+    ui->pushButton_6->setEnabled(false);
+
+    //draw 3D
+    Data.draw3DChart();
+
+    //update
+    double *max= Data.getMaxSlope();
+    QString str = "最大斜率= " + QString::number( max[1] )  + " A/w, 發生在V= " + QString::number( max[0] ) +" V";
+    ui->label_13->setText(str);
+
+}
+
+void MainWindow::redrawSlice(uint index)
+{
+    //load new data
+    Chart.clearData();
+    vector <double>P = Data.getPowers();
+    vector <double>DI = Data.getDeltaCurrents( index );
+
+    cout << "new data\n";
+
+    for(uint i=0; i< P.size();i++)
+    {
+        Chart.addData( P[i], DI[i] );
+        cout << i << ":" << P[i] << "," << DI[i] << endl;
+    }
+
+    Chart.LinearRegression();
+
+    //redraw chart
+    Chart.reDraw();
+}
+
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+    QString str = "Voltage = "  + QString::number( Data.getVoltage(value) )  +" Volt";
+    ui->label_11->setText( str );
+
+    redrawSlice( abs(value) );
+
+    str = "斜率 = "  + QString::number( Chart.getSlope() ) ;
+    ui->label_12->setText( str );
+}
